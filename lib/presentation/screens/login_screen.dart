@@ -66,7 +66,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.brand,
+      backgroundColor: Colors.white,
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -78,8 +78,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             dotCount: 4,
             activeDot: 1,
           ),
-          // White form sheet
+          // White form sheet (pulled up to overlap the teal header)
           Container(
+            transform: Matrix4.translationValues(0, -24, 0),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(

@@ -26,7 +26,7 @@ class AuthHeader extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.brand,
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 30),
       child: SafeArea(
         bottom: false,
         child: Column(
@@ -101,11 +101,11 @@ class AuthHeader extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 14),
             Text(title,
                 style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 32,
+                    fontSize: 28,
                     fontWeight: FontWeight.w900)),
             const SizedBox(height: 4),
             Text(subtitle,

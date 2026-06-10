@@ -84,7 +84,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.brand,
+      backgroundColor: Colors.white,
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -96,8 +96,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             dotCount: 4,
             activeDot: 0,
           ),
-          // White form sheet
+          // White form sheet (pulled up to overlap the teal header)
           Container(
+            transform: Matrix4.translationValues(0, -24, 0),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
