@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants/api_constants.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/show_message.dart';
 import '../../data/models/trek_model.dart';
@@ -25,11 +26,23 @@ class TrekDetailScreen extends ConsumerWidget {
               expandedHeight: 250,
               pinned: true,
               backgroundColor: Colors.white,
-              foregroundColor: Colors.white,
+              foregroundColor: AppColors.dark,
               surfaceTintColor: Colors.white,
+              leading: Padding(
+                padding: const EdgeInsets.all(8),
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.35)),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
               actions: [
                 IconButton(
-                  icon: Icon(isSaved ? Icons.bookmark : Icons.bookmark_border),
+                  style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.35)),
+                  icon: Icon(isSaved ? Icons.bookmark : Icons.bookmark_border,
+                      color: Colors.white),
                   onPressed: () async {
                     await ref.read(trekProvider).saveRoute(trek);
                     if (context.mounted) {
@@ -42,10 +55,13 @@ class TrekDetailScreen extends ConsumerWidget {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.share),
+                  style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.35)),
+                  icon: const Icon(Icons.share, color: Colors.white),
                   onPressed: () =>
                       showMessage(context, 'Route shared successfully'),
                 ),
+                const SizedBox(width: 6),
               ],
               flexibleSpace: FlexibleSpaceBar(
                 background: _Hero(trek: trek),
@@ -99,7 +115,7 @@ class _Hero extends StatelessWidget {
       children: [
         trek.imageUrl.isNotEmpty
             ? CachedNetworkImage(
-                imageUrl: trek.imageUrl,
+                imageUrl: ApiConstants.imageUrl(trek.imageUrl),
                 fit: BoxFit.cover,
                 placeholder: (_, __) => Container(color: AppColors.primarySoft),
                 errorWidget: (_, __, ___) => Container(
@@ -225,7 +241,7 @@ class _OverviewTab extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
-          childAspectRatio: 2.5,
+          childAspectRatio: 2.0,
           children: [
             _InfoTile(
                 icon: Icons.schedule, label: 'DURATION', value: trek.duration),
@@ -953,10 +969,11 @@ class _JeepList extends StatelessWidget {
                   ],
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.call, color: AppColors.brand, size: 20),
-                onPressed: () => showMessage(context, 'Calling ${c.phone}...'),
-              ),
+              Text(c.phone,
+                  style: const TextStyle(
+                      color: AppColors.brand,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14)),
             ],
           ),
         );
@@ -1005,7 +1022,7 @@ class _HotelList extends StatelessWidget {
                     width: double.infinity,
                     child: c.imageUrl.isNotEmpty
                         ? CachedNetworkImage(
-                            imageUrl: c.imageUrl,
+                            imageUrl: ApiConstants.imageUrl(c.imageUrl),
                             fit: BoxFit.cover,
                             placeholder: (_, __) =>
                                 Container(color: AppColors.primarySoft),
@@ -1068,6 +1085,12 @@ class _HotelList extends StatelessWidget {
                                           fontSize: 12.5)),
                                 ],
                               ),
+                              const SizedBox(height: 4),
+                              Text(c.phone,
+                                  style: const TextStyle(
+                                      color: AppColors.brand,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13)),
                             ],
                           ),
                         ),

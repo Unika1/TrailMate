@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants/api_constants.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/show_message.dart';
 import '../../data/models/trek_model.dart';
@@ -46,7 +47,7 @@ class TrekCard extends ConsumerWidget {
                   width: double.infinity,
                   child: trek.imageUrl.isNotEmpty
                       ? CachedNetworkImage(
-                          imageUrl: trek.imageUrl,
+                          imageUrl: ApiConstants.imageUrl(trek.imageUrl),
                           fit: BoxFit.cover,
                           placeholder: (_, __) =>
                               Container(color: AppColors.primarySoft),
